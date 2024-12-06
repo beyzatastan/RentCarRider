@@ -14,7 +14,7 @@ public class RentCarController: ControllerBase
         _rentCarService = rentCarService;
     }
     [HttpGet]
-    public async Task<ActionResult<List<Car>>>  GetAllHeroes()
+    public async Task<ActionResult<List<CarModel>>>  GetAllHeroes()
     {
         return await _rentCarService.GetAllCars();
     }
@@ -30,7 +30,7 @@ public class RentCarController: ControllerBase
         return Ok(result);
     }
     [HttpPost]
-    public async Task<IActionResult> AddCar(Car car)
+    public async Task<IActionResult> AddCar(CarModel car)
     {
         var result = await _rentCarService.AddCar(car);
         if(result is null)
@@ -39,7 +39,7 @@ public class RentCarController: ControllerBase
         return Ok(result);
     }
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHero (int id, Car request)
+    public async Task<IActionResult> UpdateHero (int id, CarModel request)
     { 
         var result = await _rentCarService.UpdateHero(id,request);
         if(result is null)

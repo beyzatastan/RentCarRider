@@ -1,7 +1,7 @@
 namespace RentCar.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-public class Car
+public class CarModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Id otomatik olarak oluşturulacak
@@ -9,6 +9,7 @@ public class Car
     public int Id { get; set; }
     public string Model { get; set; }  = string.Empty;
     public string Name { get; set; }  = string.Empty;
+    public string City { get; set; }  = string.Empty;
     public string Color { get; set; }  = string.Empty;
     public int Year { get; set; } 
     public int SeatCount { get; set; } 

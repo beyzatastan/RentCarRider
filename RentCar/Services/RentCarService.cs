@@ -12,33 +12,34 @@ public class RentCarService:IRentCarService
     {
         _context = context;
     }
-    public async Task<List<Car>>? GetAllCars()
+    public async Task<List<CarModel>>? GetAllCars()
     {
         var cars = await _context.RentCars.ToListAsync();
         return cars;
     }
 
-    public async Task<Car>? GetSingleCar(int id)
+    public async Task<CarModel>? GetSingleCar(int id)
     {
         var car =  await _context.RentCars.FindAsync(id);
         if (car == null)
             return null;
         return car;
     }
-    public async Task<List<Car>>? AddCar(Car car)
+    public async Task<List<CarModel>>? AddCar(CarModel car)
     {
         _context.RentCars.Add(car);
         await _context.SaveChangesAsync();
         return await _context.RentCars.ToListAsync();
     }
     
-    public async Task<List<Car>>? UpdateHero(int id, Car request)
+    public async Task<List<CarModel>>? UpdateHero(int id, CarModel request)
     {
         var car =  await _context.RentCars.FindAsync(id);
         if (car is null)
             return null;
            
         car.Name = request.Name;
+        car.City = request.City;
         car.Model = request.Model;
         car.Color = request.Color;
         car.imageUrl = request.imageUrl;
@@ -54,7 +55,7 @@ public class RentCarService:IRentCarService
         return await _context.RentCars.ToListAsync();
     }
 
-    public  async Task<List<Car>>?  DeleteHero(int id)
+    public  async Task<List<CarModel>>?  DeleteHero(int id)
     {
         var car =  await _context.RentCars.FindAsync(id);
         if (car is null)

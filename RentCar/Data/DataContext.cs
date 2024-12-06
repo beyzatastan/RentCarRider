@@ -19,5 +19,6 @@ public class DataContext:DbContext
     }
     //modelin oldugu için Car yazmam lazım
     //veritabanında bir tabloyu temsil edr
-    public DbSet<Car> RentCars { get; set; }
+    public DbSet<CarModel> RentCars { get; set; }
+    public DbSet<CustomerModel> Customers { get; set; }
 }

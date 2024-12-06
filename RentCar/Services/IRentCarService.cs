@@ -4,9 +4,9 @@ namespace RentCar.Services;
 
 public interface IRentCarService
 {
-    Task<List<Car>>? GetAllCars();
-    Task<Car>? GetSingleCar(int id);
-    Task<List<Car>>? AddCar(Car car);
-    Task<List<Car>>? UpdateHero(int id, Car request);
-    Task<List<Car>>? DeleteHero(int id);
+    Task<List<CarModel>>? GetAllCars();
+    Task<CarModel>? GetSingleCar(int id);
+    Task<List<CarModel>>? AddCar(CarModel car);
+    Task<List<CarModel>>? UpdateHero(int id, CarModel request);
+    Task<List<CarModel>>? DeleteHero(int id);
 }
