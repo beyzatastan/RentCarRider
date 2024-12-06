@@ -14,14 +14,14 @@ public class RentCarController: ControllerBase
         _rentCarService = rentCarService;
     }
     [HttpGet]
-    public async Task<ActionResult<List<CarModel>>>  GetAllHeroes()
+    public async Task<ActionResult<List<CarModel>>>  GetAllCars()
     {
         return await _rentCarService.GetAllCars();
     }
         
     [HttpGet("{id}")]
     //[Route(("{id}"))]
-    public async Task<IActionResult> GetSingleHeroes(int id)
+    public async Task<IActionResult> GetSingleCar(int id)
     {
         var result = await _rentCarService.GetSingleCar(id);
         if(result is null)
@@ -39,9 +39,9 @@ public class RentCarController: ControllerBase
         return Ok(result);
     }
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateHero (int id, CarModel request)
+    public async Task<IActionResult> UpdateCar (int id, CarModel request)
     { 
-        var result = await _rentCarService.UpdateHero(id,request);
+        var result = await _rentCarService.UpdateCar(id,request);
         if(result is null)
             return NotFound("not found");
                 
@@ -49,9 +49,9 @@ public class RentCarController: ControllerBase
     }
          
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteHero (int id)
+    public async Task<IActionResult> DeleteCar (int id)
     {
-        var result =await _rentCarService.DeleteHero(id);
+        var result =await _rentCarService.DeleteCar(id);
         if(result is null)
             return NotFound("not found");
                 

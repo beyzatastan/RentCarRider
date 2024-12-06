@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RentCar.Data;
 using RentCar.Model;
 
-namespace RentCar.Services;
+namespace RentCar.Services.RentCar;
 
 public class RentCarService:IRentCarService
 {
@@ -32,7 +32,7 @@ public class RentCarService:IRentCarService
         return await _context.RentCars.ToListAsync();
     }
     
-    public async Task<List<CarModel>>? UpdateHero(int id, CarModel request)
+    public async Task<List<CarModel>>? UpdateCar(int id, CarModel request)
     {
         var car =  await _context.RentCars.FindAsync(id);
         if (car is null)
@@ -55,7 +55,7 @@ public class RentCarService:IRentCarService
         return await _context.RentCars.ToListAsync();
     }
 
-    public  async Task<List<CarModel>>?  DeleteHero(int id)
+    public  async Task<List<CarModel>>?  DeleteCar(int id)
     {
         var car =  await _context.RentCars.FindAsync(id);
         if (car is null)

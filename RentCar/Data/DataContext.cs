@@ -21,4 +21,6 @@ public class DataContext:DbContext
     //veritabanında bir tabloyu temsil edr
     public DbSet<CarModel> RentCars { get; set; }
     public DbSet<CustomerModel> Customers { get; set; }
+    public DbSet<UserModel> Users { get; set; }
+
 }
