@@ -7,23 +7,23 @@ namespace RentCar.Controllers;
 [Route("api/[controller]")]
 public class RentCarController: ControllerBase
 {
-    private readonly IRentCarService _rentCarService;
+    private readonly ICarService _carService;
 
-    public RentCarController(IRentCarService rentCarService)
+    public RentCarController(ICarService carService)
     {
-        _rentCarService = rentCarService;
+        _carService = carService;
     }
     [HttpGet]
     public async Task<ActionResult<List<CarModel>>>  GetAllCars()
     {
-        return await _rentCarService.GetAllCars();
+        return await _carService.GetAllCars();
     }
         
     [HttpGet("{id}")]
     //[Route(("{id}"))]
     public async Task<IActionResult> GetSingleCar(int id)
     {
-        var result = await _rentCarService.GetSingleCar(id);
+        var result = await _carService.GetSingleCar(id);
         if(result is null)
             return NotFound("not found");
                 
@@ -32,7 +32,7 @@ public class RentCarController: ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddCar(CarModel car)
     {
-        var result = await _rentCarService.AddCar(car);
+        var result = await _carService.AddCar(car);
         if(result is null)
             return NotFound("not found");
                 
@@ -41,7 +41,7 @@ public class RentCarController: ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCar (int id, CarModel request)
     { 
-        var result = await _rentCarService.UpdateCar(id,request);
+        var result = await _carService.UpdateCar(id,request);
         if(result is null)
             return NotFound("not found");
                 
@@ -51,7 +51,7 @@ public class RentCarController: ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCar (int id)
     {
-        var result =await _rentCarService.DeleteCar(id);
+        var result =await _carService.DeleteCar(id);
         if(result is null)
             return NotFound("not found");
                 

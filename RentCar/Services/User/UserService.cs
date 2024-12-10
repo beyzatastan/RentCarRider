@@ -41,7 +41,9 @@ public class UserService: IUserService
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email;
-        user.Phone = request.Phone;
+        user.PasswordHash = request.PasswordHash;
+        user.PhoneNumber = request.PhoneNumber;
+        user.Role = request.Role;
         await _context.SaveChangesAsync();
         return await _context.Users.ToListAsync();
     }

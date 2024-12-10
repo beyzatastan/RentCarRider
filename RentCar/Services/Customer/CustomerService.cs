@@ -38,16 +38,15 @@ public class CustomerService : ICustomerService
         var customer =  await _context.Customers.FindAsync(id);
         if (customer is null)
             return null;
-        customer.FirstName = request.FirstName;
-        customer.LastName = request.LastName;
-        customer.Email = request.Email;
-        customer.Phone = request.Phone;
+       
         customer.Address = request.Address;
         customer.City = request.City;
         customer.District = request.District;
         customer.BirthDate = request.BirthDate;
         customer.PostalCode = request.PostalCode;
-        customer.TCKimlikNo = request.TCKimlikNo;
+        customer.IdentityNumber = request.IdentityNumber;
+        customer.DrivingLicenseNumber = request.DrivingLicenseNumber;
+        customer.DrivingLicenseIssuedDate = request.DrivingLicenseIssuedDate;
         
         await _context.SaveChangesAsync();
         return await _context.Customers.ToListAsync();
