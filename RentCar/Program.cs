@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RentCar.Data;
 using RentCar.Services;
+using RentCar.Services.Car;
 using RentCar.Services.Customer;
-using RentCar.Services.RentCar;
 using RentCar.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +15,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IRentCarService, RentCarService>();
+builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
