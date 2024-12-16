@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ApMbT3+hMffp+Zjgu+aODSbwOSd12Nc25oK39tMtIgfGMv6b9PcKVmmY+IWeA1cM8PNhPKpgSkn9dMHF+ke/JQ==",
+  "dgSpecHash": "v3H5o/ziXKo=",
   "success": true,
   "projectFilePath": "/Users/beyza/Developer/RentCar/RentCar/RentCar.csproj",
   "expectedPackageFiles": [
@@ -79,5 +79,12 @@
     "/Users/beyza/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/beyza/.nuget/packages/system.windows.extensions/5.0.0/system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Access to the path '/Users/beyza/.local/share/NuGet/http-cache/670c1461c29885f9aa22c281d8b7da90845b38e4$ps:_api.nuget.org_v3_index.json/vuln_index.dat-new' is denied."
+    }
+  ]
 }

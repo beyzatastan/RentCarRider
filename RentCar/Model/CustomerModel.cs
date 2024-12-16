@@ -3,26 +3,41 @@ using Microsoft.EntityFrameworkCore;
 namespace RentCar.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 public class CustomerModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; } // Primary Key for CustomerModel
+    public int Id { get; set; } // Primary Key
 
-    public int UserId { get; set; } // Foreign Key linking to UserModel
-    [ForeignKey("UserId")]
-    public UserModel User { get; set; }
-    public string IdentityNumber { get; set; }
-    public DateTime DrivingLicenseIssuedDate { get; set; }
-    public string DrivingLicenseNumber { get; set; } // Driving license
+    [Required, ForeignKey("User")]
+    public int UserId { get; set; } // Foreign key linking to UserModel
+    public UserModel User { get; set; } // Navigation property
+
+    [Required, StringLength(11)]
+    public string IdentityNumber { get; set; } // National ID
+
+    [Required]
+    public DateTime DrivingLicenseIssuedDate { get; set; } // Driving license issue date
+
+    [Required, StringLength(20)]
+    public string DrivingLicenseNumber { get; set; } // Driving license number
+
+    [Required]
     public DateTime BirthDate { get; set; } // Birth date
-    public string Phone { get; set; } // Phone
-    public string City { get; set; } // City
-    public string District { get; set; } // District
-    public string Address { get; set; } // Address
-    public string PostalCode { get; set; } // Postal Code
-    public ICollection<ReviewModel> Reviews { get; set; } // Kullanıcının incelemeleri
-    public ICollection<BookingModel> Bookings { get; set; } = new List<BookingModel>(); // List of bookings made by the user
 
+    [Required, Phone]
+    public string Phone { get; set; } // Phone number
+
+    [Required]
+    public string City { get; set; } // City
+    [Required]
+    public string District { get; set; }
+    [Required]
+    public string Address { get; set; } 
+    [Required]
+    public string PostalCode { get; set; } 
+
+
+    public ICollection<ReviewModel> Reviews { get; set; } = new HashSet<ReviewModel>();
+    public ICollection<BookingModel> Bookings { get; set; } = new HashSet<BookingModel>();
 }

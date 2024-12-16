@@ -22,54 +22,72 @@ public class DataContext:DbContext
    
     public DbSet<UserModel> Users { get; set; } // Table for users
     public DbSet<CustomerModel> Customers { get; set; }
+    public DbSet<CarImageModel> CarImages { get; set; }
     public DbSet<SupplierModel> Suppliers { get; set; } // Table for suppliers
     public DbSet<LocationModel> Locations { get; set; } // Table for locations
     public DbSet<CarModel> Cars { get; set; } // Table for cars
     public DbSet<BookingModel> Bookings { get; set; } // Table for bookings
     public DbSet<ReviewModel> Reviews { get; set; } // Table for reviews
-   
-    
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         // TCKimlikNo için benzersiz bir indeks oluşturma
+        // Unique Constraints
         modelBuilder.Entity<CustomerModel>()
             .HasIndex(c => c.IdentityNumber)
             .IsUnique();
-
-        // DrivingLicenseNumber için benzersiz bir indeks oluşturma
         modelBuilder.Entity<CustomerModel>()
             .HasIndex(c => c.DrivingLicenseNumber)
             .IsUnique();
-        
-        
+
+        // User and Customer Relationship
         modelBuilder.Entity<CustomerModel>()
             .HasOne(c => c.User)
             .WithOne()
             .HasForeignKey<CustomerModel>(c => c.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // Car and Images Relationship
+        modelBuilder.Entity<CarImageModel>()
+            .HasOne(ci => ci.Car)
+            .WithMany(c => c.Images)
+            .HasForeignKey(ci => ci.CarId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Review - User ilişkisi
+        // Reviews Relationships
         modelBuilder.Entity<ReviewModel>()
-            .HasOne(r => r.Customer) // Review'in bir User'ı var
-            .WithMany(u => u.Reviews) // User'ın birçok Review'i olabilir
-            .HasForeignKey(r => r.CustomerId) // Foreign Key UserId
+            .HasOne(r => r.Customer)
+            .WithMany(c => c.Reviews)
+            .HasForeignKey(r => r.CustomerId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Review - Supplier ilişkisi
         modelBuilder.Entity<ReviewModel>()
-            .HasOne(r => r.Supplier) // Review'in bir Supplier'ı var
-            .WithMany(s => s.Reviews) // Supplier'ın birçok Review'i olabilir
-            .HasForeignKey(r => r.SupplierId) // Foreign Key SupplierId
+            .HasOne(r => r.Supplier)
+            .WithMany(s => s.Reviews)
+            .HasForeignKey(r => r.SupplierId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Review - Car ilişkisi (Eğer gerekliyse)
         modelBuilder.Entity<ReviewModel>()
-            .HasOne(r => r.Car) // Review bir arabayı referans alıyor
-            .WithMany(c => c.Reviews) // Bir araba birden fazla Review'e sahip olabilir
+            .HasOne(r => r.Car)
+            .WithMany(c => c.Reviews)
             .HasForeignKey(r => r.CarId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        
+        modelBuilder.Entity<UserModel>()
+            .Property(u => u.Email)
+            .HasMaxLength(255)
+            .IsRequired();
+        
+        modelBuilder.Entity<CustomerModel>()
+            .Property(u => u.IdentityNumber)
+            .HasMaxLength(11)
+            .IsRequired();
+
+        
     }
 
 
