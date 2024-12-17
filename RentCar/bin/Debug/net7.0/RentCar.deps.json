@@ -8,11 +8,13 @@
     ".NETCoreApp,Version=v7.0": {
       "RentCar/1.0.0": {
         "dependencies": {
+          "BCrypt.Net-Next": "4.0.3",
           "Microsoft.AspNetCore.OpenApi": "7.0.20",
           "Microsoft.EntityFrameworkCore": "7.0.0",
           "Microsoft.EntityFrameworkCore.Design": "7.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.0",
+          "Migrations": "1.0.1",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
@@ -53,11 +55,27 @@
           }
         }
       },
+      "BCrypt.Net-Next/4.0.3": {
+        "runtime": {
+          "lib/net6.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.0.3.0"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "runtime": {
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "log4net/2.0.5": {
+        "runtime": {
+          "lib/net45-full/log4net.dll": {
+            "assemblyVersion": "1.2.15.0",
+            "fileVersion": "1.2.15.0"
           }
         }
       },
@@ -400,6 +418,17 @@
           }
         }
       },
+      "Migrations/1.0.1": {
+        "dependencies": {
+          "log4net": "2.0.5"
+        },
+        "runtime": {
+          "lib/net40-Client/Migrations.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
+          }
+        }
+      },
       "Mono.TextTemplating/2.2.1": {
         "dependencies": {
           "System.CodeDom": "4.4.0"
@@ -696,12 +725,26 @@
       "path": "azure.identity/1.6.0",
       "hashPath": "azure.identity.1.6.0.nupkg.sha512"
     },
+    "BCrypt.Net-Next/4.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
+      "path": "bcrypt.net-next/4.0.3",
+      "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
+    },
     "Humanizer.Core/2.14.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "log4net/2.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AEqPZz+v+OikfnR2SqRVdQPnSaLq5y9Iz1CfRQZ9kTKPYCXHG6zYmDHb7wJotICpDLMr/JqokyjiqKAjUKp0ng==",
+      "path": "log4net/2.0.5",
+      "hashPath": "log4net.2.0.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.OpenApi/7.0.20": {
       "type": "package",
@@ -961,6 +1004,13 @@
       "sha512": "sha512-Bh6blKG8VAKvXiLe2L+sEsn62nc1Ij34MrNxepD2OCrS5cpCwQa9MeLyhVQPQ/R4Wlzwuy6wMK8hLb11QPDRsQ==",
       "path": "microsoft.win32.systemevents/5.0.0",
       "hashPath": "microsoft.win32.systemevents.5.0.0.nupkg.sha512"
+    },
+    "Migrations/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-udBzfD8ALn1uc1cOfk+inSO++xliThW+llQ0URIYxVDtjiTSp2s5N0l81Bcy4wAlaAeJIdlX3qh+cX+GJGRatA==",
+      "path": "migrations/1.0.1",
+      "hashPath": "migrations.1.0.1.nupkg.sha512"
     },
     "Mono.TextTemplating/2.2.1": {
       "type": "package",

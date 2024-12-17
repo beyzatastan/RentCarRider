@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using RentCar.Data;
+using RentCar.DTOS.UserDTO;
 using RentCar.Model;
 
 namespace RentCar.Services.User;
 
-public class UserService: IUserService
+public class UserService : IUserService
 {
     private readonly DataContext _context;
 
@@ -12,50 +13,68 @@ public class UserService: IUserService
     {
         _context = context;
     }
-    public async Task<List<UserModel>>? GetAllUsers()
+
+    public async Task<List<UserModel>> GetAllUsers()
     {
-        var users = await _context.Users.ToListAsync();
-        return users;
+        return await _context.Users.ToListAsync();
     }
 
-    public async Task<UserModel>? GetSingleUser(int id)
+    public async Task<UserModel?> GetSingleUser(int id)
     {
-        var user = await _context.Users.FindAsync(id);
-        if (user == null)
-            return null;
-        return user;
+        return await _context.Users.FindAsync(id);
     }
-    
-    public async Task<List<UserModel>>? AddUser(UserModel user)
+
+    public async Task<string> Register(AddUserDto dto)
     {
+        if (await _context.Users.AnyAsync(u => u.Email == dto.Email))
+            return "Email already in use";
+
+        var user = new UserModel
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+            PhoneNumber = dto.PhoneNumber,
+            Role = dto.Role
+        };
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
-        return await _context.Users.ToListAsync();
+        return "User registered successfully";
     }
 
-    public async Task<List<UserModel>>? UpdateUser(int id, UserModel request)
+    public async Task<UserModel?> Login(AddUserDto dto)
     {
-        var user =  await _context.Users.FindAsync(id);
-        if (user is null)
+        var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == dto.Email);
+        if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             return null;
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
-        user.Email = request.Email;
-        user.PasswordHash = request.PasswordHash;
-        user.PhoneNumber = request.PhoneNumber;
-        user.Role = request.Role;
+
+        return user;
+    }
+
+    public async Task<UserModel?> UpdateUser(UpdateUserDto dto)
+    {
+        var user = await _context.Users.FindAsync(dto.Id);
+        if (user == null) return null;
+
+        user.FirstName = dto.FirstName ?? user.FirstName;
+        user.LastName = dto.LastName ?? user.LastName;
+        user.Email = dto.Email ?? user.Email;
+        user.PasswordHash = dto.Password != null ? BCrypt.Net.BCrypt.HashPassword(dto.Password) : user.PasswordHash;
+        user.PhoneNumber = dto.PhoneNumber ?? user.PhoneNumber;
+
         await _context.SaveChangesAsync();
-        return await _context.Users.ToListAsync();
+        return user;
     }
 
-    public  async Task<List<UserModel>>?  DeleteUser(int id)
+    public async Task<bool> DeleteUser(int id)
     {
-        var user =  await _context.Users.FindAsync(id);
-        if (user is null)
-            return null;
-           
+        var user = await _context.Users.FindAsync(id);
+        if (user == null) return false;
+
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
-        return await _context.Users.ToListAsync();
+        return true;
     }
 }

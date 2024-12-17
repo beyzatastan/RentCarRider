@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "v3H5o/ziXKo=",
+  "dgSpecHash": "DEP6qQ/Kjm0=",
   "success": true,
   "projectFilePath": "/Users/beyza/Developer/RentCar/RentCar/RentCar.csproj",
   "expectedPackageFiles": [
     "/Users/beyza/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/Users/beyza/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
+    "/Users/beyza/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/beyza/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/beyza/.nuget/packages/microsoft.aspnetcore.openapi/7.0.20/microsoft.aspnetcore.openapi.7.0.20.nupkg.sha512",
     "/Users/beyza/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

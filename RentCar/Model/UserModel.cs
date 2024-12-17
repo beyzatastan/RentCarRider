@@ -21,10 +21,7 @@ public class UserModel {
     
     [Required]
     public string PhoneNumber { get; set; } = string.Empty; // Hashed password for security
-
     [Required]
-    public string Role { get; set; } = "Customer"; // Role of the user, such as 'Customer' or 'Admin'
-
-  
-
+    public string Role { get; set; }  // Role of the user, such as 'Customer' or 'Admin'
+    
 }

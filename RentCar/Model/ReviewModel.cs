@@ -5,7 +5,6 @@ namespace RentCar.Model;
 
 public class ReviewModel
 {
-    
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Id otomatik olarak oluşturulacak
         public int Id { get; set; } // Unique identifier for each review

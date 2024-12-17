@@ -7,21 +7,21 @@ using RentCar.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container."
-
+// Add services to the container
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddDbContext<DataContext>();
 var app = builder.Build();
 
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication(); // Eklendi
 app.UseAuthorization();
 
 app.MapControllers();

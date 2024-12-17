@@ -17,26 +17,8 @@ public class CarController : ControllerBase
         _context = context;
     }
 
-    // GET: api/car
-    [HttpGet]
-    public async Task<IActionResult> GetCars()
-    {
-        var cars = await _context.Cars.Include(c => c.Images).ToListAsync();
-        return Ok(cars);
-    }
-
-    // GET: api/car/{id}
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetCarById(int id)
-    {
-        var car = await _context.Cars.Include(c => c.Images).FirstOrDefaultAsync(c => c.Id == id);
-        if (car == null) return NotFound("Car not found");
-        return Ok(car);
-    }
-
-    // POST: api/car
-    [HttpPost]
-    public async Task<IActionResult> AddCar(AddCarDto dto)
+    [HttpPost("add")]
+    public async Task<IActionResult> AddCar([FromBody] AddCarDto dto)
     {
         var car = new CarModel
         {
@@ -51,14 +33,39 @@ public class CarController : ControllerBase
             LocationId = dto.LocationId
         };
 
-
-        // Veritabanına ekle
         _context.Cars.Add(car);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetCarById), new { id = car.Id }, car);
+        return Ok("Car added successfully");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetCars()
+    {
+        var cars = await _context.Cars.ToListAsync();
+        return Ok(cars);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteCar(int id)
+    {
+        var car = await _context.Cars.FindAsync(id);
+        if (car == null) return NotFound("Car not found");
+
+        _context.Cars.Remove(car);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+    // GET: api/car/{id}
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCarById(int id)
+    {
+        var car = await _context.Cars.Include(c => c.Images).FirstOrDefaultAsync(c => c.Id == id);
+        if (car == null) return NotFound("Car not found");
+        return Ok(car);
+    }
+    
     // PUT: api/car/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCar(int id, UpdateCarDto dto)
@@ -92,18 +99,5 @@ public class CarController : ControllerBase
 
         return NoContent();
     }
-
-
-
-    // DELETE: api/car/{id}
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCar(int id)
-    {
-        var car = await _context.Cars.FindAsync(id);
-        if (car == null) return NotFound("Car not found");
-
-        _context.Cars.Remove(car);
-        await _context.SaveChangesAsync();
-        return NoContent();
-    }
+    
 }
